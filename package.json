@@ -138,6 +138,6 @@
     "sort-classes": "npm:prettier-plugin-tailwindcss",
     "tailwindcss": "^3.4.1",
     "tidy-imports": "npm:@trivago/prettier-plugin-sort-imports",
-    "typescript": "^5"
+    "typescript": "^6"
   }
 }
