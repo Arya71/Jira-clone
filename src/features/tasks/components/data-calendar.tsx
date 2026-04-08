@@ -54,12 +54,22 @@ const CustomToolbar = ({ date, onNavigate }: CustomToolbarProps) => {
 export const DataCalendar = ({ data }: DataCalendarProps) => {
   const [value, setValue] = useState(data.length > 0 ? new Date(data[0].dueDate) : new Date());
 
-  const events = data.map((task) => ({
+  type CalendarEvent = {
+    start: Date;
+    end: Date;
+    title: string;
+    project: string;
+    assignee: string;
+    status: Task['status'];
+    id: string;
+  };
+
+  const events: CalendarEvent[] = data.map((task) => ({
     start: new Date(task.dueDate),
     end: new Date(task.dueDate),
     title: task.name,
-    project: task.project,
-    assignee: task.assignee,
+    project: task.projectId,
+    assignee: task.assigneeId,
     status: task.status,
     id: task.$id,
   }));
@@ -85,9 +95,18 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
         weekdayFormat: (date, culture, localizer) => localizer?.format(date, 'EEE', culture) ?? '',
       }}
       components={{
-        eventWrapper: ({ event }) => (
-          <EventCard id={event.id} title={event.title} assignee={event.assignee} project={event.project} status={event.status} />
-        ),
+        eventWrapper: ({ event }: any) => {
+          const e = event as CalendarEvent;
+          return (
+            <EventCard
+              id={e.id}
+              title={e.title}
+              assignee={e.assignee as any}
+              project={e.project as any}
+              status={e.status}
+            />
+          );
+        },
         toolbar: () => <CustomToolbar date={value} onNavigate={handleNavigate} />,
       }}
     />
