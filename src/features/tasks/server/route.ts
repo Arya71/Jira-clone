@@ -185,7 +185,7 @@ const app = new Hono()
       status,
       workspaceId,
       projectId,
-      dueDate,
+      dueDate: dueDate.toISOString(),
       assigneeId,
       position: newPosition,
     });
