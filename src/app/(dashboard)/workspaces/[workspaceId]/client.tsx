@@ -80,7 +80,7 @@ export const TaskList = ({ data, total }: TaskListProps) => {
                     <p className="truncate text-lg font-medium">{task.name}</p>
 
                     <div className="flex items-center gap-x-2">
-                      <p>{task.project?.name}</p>
+                      <p>{task.projectId}</p>
 
                       <div aria-hidden className="size-1 rounded-full bg-neutral-300" />
 
